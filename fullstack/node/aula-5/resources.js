@@ -30,14 +30,22 @@ app.post('/api/users', (req, res) => {
   res.send(newUser);
 });
 
-// app.put('caminho_para_atualizar_um_usuário', (req, res) => {
-//   // Procure o usuário a partir do id
-//   // Se não for encontrado, emita um erro que condiz e uma mensagem
-//   // Se for encontrado, faça a validação dos campos obrigatórios
-//   // Se estiver inválido, retorne um status que condiz e uma mensagem
-//   // Se for válido, atualize o usuário encontrado a partir do id com os parâmetros recebidos
-//   // Retorne o usuário atualizado
-// });
+app.put('/api/users/:id', function (req, res) {
+  // Procure o usuário a partir do id
+  const getUser = users.find(user => user.id === parseInt(req.params.id)) // .find é de array
+  // Se não for encontrado, emita um erro que condiz e uma mensagem
+  if (!getUser) {
+    return res.status(404).send('Usuário não encontrado.'); // bad request
+  } 
+  // Se for encontrado, faça a validação dos campos obrigatórios
+  getUser.name = req.body.name
+  getUser.email = req.body.email
+  // Se estiver inválido, retorne um status que condiz e uma mensagem
+  // Se for válido, atualize o usuário encontrado a partir do id com os parâmetros recebidos
+  // Retorne o usuário atualizado
+  res.send(getUser)
+  res.send('Alteração feita com sucesso')
+});
 
 // app.delete('/api/users/:id', (req, res) => {
 // });
