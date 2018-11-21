@@ -1,3 +1,4 @@
+// modelo de usuários para imitar um banco de dados
 const users = [
   {
     id: 1,

@@ -8,12 +8,12 @@ app.use(express.json());
 
 app.get('/', (req, res) => res.send('Hello world!'));
 
-app.get('/api/users', (req, res) => res.send(users));
+app.get('/api/users', (req, res) => res.send(users)); // mande para o usuário os users.js
 
 app.get('/api/users/:id', (req, res) => {
   const foundUser = users.find(user => user.id === parseInt(req.params.id));
   if (!foundUser) {
-    return res.status(404).send('Deu merda');
+    return res.status(404).send('Deu merda'); // bad request 
   }
 
   res.send(foundUser);
